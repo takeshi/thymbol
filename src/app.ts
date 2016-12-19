@@ -38,6 +38,14 @@ window.$ = function () {
 
 $(() => {
     console.log('document#ready');
-    // document.write("test");
+
+    const element = $(`
+<div>
+    <h2 th:text="#{welcome}">Welcome!</h2>
+</div>
+`);
+    console.log(element.html());
+    let result = thymol.render(element[0]);
+    console.log($(result).html());
 
 });

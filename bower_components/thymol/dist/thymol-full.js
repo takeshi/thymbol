@@ -73,6 +73,12 @@ thymol = function () {
         postExecute();
         return thymol.thDocument;
     }
+    function render(doc){
+        var base = new ThNode(doc, false, null, null, null, doc.nodeName, "::", false, doc);
+        Thymol.prototype.process(base);
+        return doc; 
+    }
+
     function jqSetup(jq) {
         jq.fn.extend({
             getComments: function () {
@@ -2370,6 +2376,7 @@ thymol = function () {
         jqSetup: jqSetup,
         isClientSide: isClientSide,
         execute: execute,
+        render: render,
         updatePrefix: updatePrefix,
         init: init,
         ready: ready,

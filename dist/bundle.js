@@ -104,7 +104,10 @@ window.$ = function () {
 };
 $(function () {
     console.log('document#ready');
-    // document.write("test");
+    var element = $("\n<div>\n    <h2 th:text=\"#{welcome}\">Welcome!</h2>\n</div>\n");
+    console.log(element.html());
+    var result = thymol.render(element[0]);
+    console.log($(result).html());
 });
 
 
