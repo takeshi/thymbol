@@ -1,0 +1,21 @@
+{
+  "name": "thymboljs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^3.1.0",
+    "lite-server": "^2.2.2",
+    "ts-loader": "^1.0.0-beta.1",
+    "typescript": "^2.1.4",
+    "webpack": "^2.2.0-rc.1"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js -w",
+    "dev": "lite-server",
+    "serve": "concurrently \"npm run build\" \"npm run dev\" "
+  },
+  "author": "",
+  "license": "ISC"
+}
