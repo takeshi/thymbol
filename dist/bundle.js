@@ -73,6 +73,39 @@
 "use strict";
 
 exports.app = {};
+thymol.ready(function () {
+    thymol.configurePreExecution(function () {
+        thymol.sessionContext.createVariable("a", "Some text");
+        thymol.sessionContext.createVariable("b", 123);
+        thymol.sessionContext.createVariable("c", "Hello");
+        console.log('configurePreExecution');
+    });
+    thymol.configurePostExecution(function () {
+        thymol.sessionContext = [];
+        console.log('configurePostExecution');
+        for (var _i = 0, inits_1 = inits; _i < inits_1.length; _i++) {
+            var fn = inits_1[_i];
+            fn();
+        }
+    });
+});
+// document ready の実行を遅らせる
+var jq = window.$;
+var inits = [];
+window.$ = function () {
+    if (arguments.length === 1) {
+        if (typeof arguments[0] === 'function') {
+            inits.push(arguments[0]);
+            return;
+        }
+        console.log(typeof arguments[0]);
+    }
+    jq.apply(this, arguments);
+};
+$(function () {
+    console.log('document#ready');
+    // document.write("test");
+});
 
 
 /***/ }
