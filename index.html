@@ -4,7 +4,11 @@
     <title>Document</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/thymol/dist/thymol.js"></script>
+    <script src="bower_components/thymol/dist/thymol.js"
+
+         data-thymol-load="src/hello-attributes.js, src/planets-data.js"
+    
+    ></script>
 </head>
 
 <body>
@@ -21,6 +25,21 @@
     </table>
 
 </div>
+
+    <h1>To the world...</h1>
+    
+    <p hello:sayto="World">Hi ya!</p>
+
+    <h1>To each planet...</h1>
+
+    <ul>
+      <li th:each="planet : ${planets}" hello:saytoplanet="${planet}">Hi Planet X!</li>
+    </ul>
+
+    <script>
+        console.log('index.html');
+    </script>
+
 </body>
 
 </html>

@@ -17,7 +17,7 @@
 
  *---------------------------------------------------------------------------*/
 
-thymol = function() {
+thymol = function () {
     thymol.thVersion = "2.0.0";
     thymol.thReleaseDate = "2015-03-31";
     thymol.thURL = "http://www.thymoljs.org";
@@ -27,15 +27,15 @@ thymol = function() {
     thymol.thThymeleafElementsList = [];
     thymol.objects = {};
     var textFuncSynonym = "~~~~", varRefExpr = /([$#]{.*?})/, literalTokenExpr = /^[a-zA-Z0-9\[\]\.\-_]*$/, startParserLevelCommentExpr = /^\s*\/\*\s*$/, endParserLevelCommentExpr = /^\s*\*\/\s*$/, startParserLevelCommentExpr2 = /^\/\*[^\/].*/, endParserLevelCommentExpr2 = /.*[^\/]\*\/$/, prototypeOnlyCommentEscpExpr = /\/\*\/(.*)\/\*\//, varExpr3 = /[\$\*#@]{1}\{(.*)\}$/, nonURLExpr = /[\$\*#]{1}\{(?:!?[^}]*)\}/, numericExpr = /^[+\-]?[0-9]*?[.]?[0-9]*?$/, varParExpr = /([^(]*)\s*[(]([^)]*?)[)]/, domSelectExpr = /([\/]{1,2})?([A-Za-z0-9_\-]*(?:[\(][\)])?)?([^\[]\S[A-Za-z0-9_\-]*(?:[\(][\)])?[\/]*(?:[\.\/#]?[^\[]\S[A-Za-z0-9_\-]*(?:[\(][\)])?[\/]*)*)?([\[][^\]]*?[\]])?/, litSubstExpr = /\.*?([\|][^\|]*?[\|])\.*?/;
-    function Thymol() {}
+    function Thymol() { }
     function isClientSide() {
         if (typeof thymol.isServerSide !== "undefined" && !!thymol.isServerSide()) {
-            thymol.isClientSide = function() {
+            thymol.isClientSide = function () {
                 return false;
             };
             return false;
         }
-        thymol.isClientSide = function() {
+        thymol.isClientSide = function () {
             return true;
         };
         return true;
@@ -75,12 +75,12 @@ thymol = function() {
     }
     function jqSetup(jq) {
         jq.fn.extend({
-            getComments: function() {
-                return this.filter(function() {
+            getComments: function () {
+                return this.filter(function () {
                     return this.nodeType === 8;
                 });
             },
-            getThDecorated: function(thInst) {
+            getThDecorated: function (thInst) {
                 var i, iAttrName, iLength, j, jLength, instances = [], result = null, expanded = false;
                 if (thInst.escpName !== null) {
                     instances = this.filter(thInst.escpName);
@@ -193,7 +193,7 @@ thymol = function() {
         }
         this.applicationContext = thymol.makeContext("application", accessor);
         this.sessionContext = thymol.makeContext("session", undefined);
-        this.sessionContext.persist = function() {
+        this.sessionContext.persist = function () {
             var save = this.serialise();
             thymol.thTop.name = save;
         };
@@ -249,11 +249,11 @@ thymol = function() {
             }
         }
         executeDeferred();
-        (function() {
+        (function () {
             var htmlTagAttrs = $("html")[0].attributes, tp = null, tu, nsspec;
-            $([ thymol.thURL, thymol.thAltURL ]).each(function() {
+            $([thymol.thURL, thymol.thAltURL]).each(function () {
                 tu = this;
-                $(htmlTagAttrs).each(function() {
+                $(htmlTagAttrs).each(function () {
                     if (this.value == tu) {
                         nsspec = this.localName.split(":");
                         if (nsspec.length > 0) {
@@ -272,11 +272,11 @@ thymol = function() {
         if (!!thymol.thRequest) {
             thymol.thWindow.location.search = thymol.thRequest;
         }
-        (function(app, req) {
-            var e, f, a = /\+/g, r = /([^&=]+)=?([^&]*)/g, d = function(s) {
+        (function (app, req) {
+            var e, f, a = /\+/g, r = /([^&=]+)=?([^&]*)/g, d = function (s) {
                 return decodeURIComponent(s.replace(a, " "));
             }, q = thymol.thWindow.location.search.substring(1), surl, scriptUrl = defaultScriptUrl;
-            $("script").each(function() {
+            $("script").each(function () {
                 surl = this.src;
                 if (surl.indexOf(thymol.thScriptName) >= 0) {
                     scriptUrl = d(surl);
@@ -286,84 +286,84 @@ thymol = function() {
             while (e = r.exec(scriptUrl)) {
                 f = e[1].split("?");
                 switch (f[1]) {
-                  case "thPrefix":
-                    thymol.prefix = e[2];
-                    break;
+                    case "thPrefix":
+                        thymol.prefix = e[2];
+                        break;
 
-                  case "thDataPrefix":
-                    thymol.dataPrefix = e[2];
-                    break;
+                    case "thDataPrefix":
+                        thymol.dataPrefix = e[2];
+                        break;
 
-                  case "thMessagePath":
-                    thymol.messagePath = e[2];
-                    break;
+                    case "thMessagePath":
+                        thymol.messagePath = e[2];
+                        break;
 
-                  case "thResourcePath":
-                    thymol.resourcePath = e[2];
-                    break;
+                    case "thResourcePath":
+                        thymol.resourcePath = e[2];
+                        break;
 
-                  case "thMessagesBaseName":
-                    thymol.messagesBaseName = e[2];
-                    break;
+                    case "thMessagesBaseName":
+                        thymol.messagesBaseName = e[2];
+                        break;
 
-                  case "thRelativeRootPath":
-                    thymol.relativeRootPath = e[2];
-                    break;
+                    case "thRelativeRootPath":
+                        thymol.relativeRootPath = e[2];
+                        break;
 
-                  case "thExtendedMapping":
-                    thymol.extendedMapping = e[2];
-                    break;
+                    case "thExtendedMapping":
+                        thymol.extendedMapping = e[2];
+                        break;
 
-                  case "thTemplateSuffix":
-                    thymol.templateSuffix = e[2];
-                    break;
+                    case "thTemplateSuffix":
+                        thymol.templateSuffix = e[2];
+                        break;
 
-                  case "thLocalMessages":
-                    thymol.localMessages = e[2];
-                    break;
+                    case "thLocalMessages":
+                        thymol.localMessages = e[2];
+                        break;
 
-                  case "thDisableMessages":
-                    thymol.disableMessages = e[2];
-                    break;
+                    case "thDisableMessages":
+                        thymol.disableMessages = e[2];
+                        break;
 
-                  case "thIndexFile":
-                    thymol.indexFile = e[2];
-                    break;
+                    case "thIndexFile":
+                        thymol.indexFile = e[2];
+                        break;
 
-                  case "thProtocol":
-                    thymol.protocol = e[2];
-                    break;
+                    case "thProtocol":
+                        thymol.protocol = e[2];
+                        break;
 
-                  case "thDebug":
-                    thymol.debug = e[2];
-                    break;
+                    case "thDebug":
+                        thymol.debug = e[2];
+                        break;
 
-                  case "thRoot":
-                    thymol.root = e[2];
-                    break;
+                    case "thRoot":
+                        thymol.root = e[2];
+                        break;
 
-                  case "thPath":
-                    thymol.path = e[2];
-                    break;
+                    case "thPath":
+                        thymol.path = e[2];
+                        break;
 
-                  case "thAllowNullText":
-                    thymol.allowNullText = e[2];
-                    break;
+                    case "thAllowNullText":
+                        thymol.allowNullText = e[2];
+                        break;
 
-                  case "thLocale":
-                    thymol.locale.value = e[2];
-                    break;
+                    case "thLocale":
+                        thymol.locale.value = e[2];
+                        break;
 
-                  case "thDefaultPrecision":
-                    thymol.thDefaultPrecision = e[2];
-                    break;
+                    case "thDefaultPrecision":
+                        thymol.thDefaultPrecision = e[2];
+                        break;
 
-                  case "thDefaultPrecedence":
-                    thymol.thDefaultPrecedence = e[2];
-                    break;
+                    case "thDefaultPrecedence":
+                        thymol.thDefaultPrecedence = e[2];
+                        break;
 
-                  default:
-                    app.createVariable(e[1], e[2]);
+                    default:
+                        app.createVariable(e[1], e[2]);
                 }
             }
             while (e = r.exec(q)) {
@@ -375,7 +375,7 @@ thymol = function() {
         thymol.thSubstituteby = new thymol.ThAttr("substituteby", null, 100, null, thymol.prefix);
         thymol.thFragment = new thymol.ThAttr("fragment", null, 2e4, null, thymol.prefix);
         thymol.thRemove = null;
-        thymol.thBlock = new thymol.ThElement("block", function(element) {
+        thymol.thBlock = new thymol.ThElement("block", function (element) {
             var i, limit = element.childNodes.length;
             for (i = 0; i < limit; i++) {
                 if (element.childNodes[i].nodeType === 1) {
@@ -418,9 +418,9 @@ thymol = function() {
         if (!(typeof thMappings === "undefined")) {
             this.mappings = [];
             for (j = 0, jLimit = thMappings.length; j < jLimit; j++) {
-                this.mappings.push([ thMappings[j][0], thMappings[j][1] ]);
+                this.mappings.push([thMappings[j][0], thMappings[j][1]]);
             }
-            this.mappings.sort(function(a, b) {
+            this.mappings.sort(function (a, b) {
                 return a[0].length > b[0].length ? -1 : 1;
             });
         }
@@ -970,7 +970,7 @@ thymol = function() {
     function getProperties(propFile) {
         var props = null;
         var messages = [];
-        $.get(propFile, function(textContent, status) {
+        $.get(propFile, function (textContent, status) {
             var err = null;
             try {
                 if ("success" == status) {
@@ -1031,7 +1031,7 @@ thymol = function() {
         return messages;
     }
     Thymol.prototype = {
-        process: function(rootNode) {
+        process: function (rootNode) {
             var n = rootNode;
             try {
                 while (n.thDoc) {
@@ -1069,7 +1069,7 @@ thymol = function() {
                 }
             }
         },
-        getChildren: function(rootNode) {
+        getChildren: function (rootNode) {
             var count = 0, last = null, changed = false, child, froot, fstar, fchildren, i, iLimit, j, jLimit, element, matches, theAttr;
             if (!rootNode.visited) {
                 this.processComments(rootNode);
@@ -1102,7 +1102,7 @@ thymol = function() {
             }
             return changed;
         },
-        processChildren: function(rootNode) {
+        processChildren: function (rootNode) {
             var i, iLimit, j, jLimit, k, kLimit;
             var elements = rootNode.thDoc.getElementsByTagName("*");
             for (k = 0, kLimit = elements.length; k < kLimit; k++) {
@@ -1141,7 +1141,7 @@ thymol = function() {
                         attributes = allAttributes;
                     }
                     if (attributes.length > 0) {
-                        attributes.sort(function(a, b) {
+                        attributes.sort(function (a, b) {
                             return b.order - a.order;
                         });
                         var matchedAttributes = [];
@@ -1184,7 +1184,7 @@ thymol = function() {
                             }
                         }
                         if (matchedAttributes.length > 0) {
-                            matchedAttributes.sort(function(a, b) {
+                            matchedAttributes.sort(function (a, b) {
                                 return a.attr.precedence - b.attr.precedence;
                             });
                             var updated = false;
@@ -1214,7 +1214,7 @@ thymol = function() {
                 }
             }
         },
-        override: function(paramName, paramValue) {
+        override: function (paramName, paramValue) {
             var param = paramValue, thv;
             thv = thymol.thWindow[paramName];
             if (typeof thv === "undefined") {
@@ -1245,7 +1245,7 @@ thymol = function() {
             }
             return param;
         },
-        doDisable: function(attrName) {
+        doDisable: function (attrName) {
             var tha = this.getThAttrByName(attrName);
             if (tha !== null) {
                 tha.disable();
@@ -1255,7 +1255,7 @@ thymol = function() {
                 }
             }
         },
-        getThAttrByName: function(name) {
+        getThAttrByName: function (name) {
             var attrList = thymol.thThymeleafPrefixList[thymol.prefix];
             attrList.push(thymol.thInclude);
             attrList.push(thymol.thReplace);
@@ -1269,20 +1269,20 @@ thymol = function() {
             }
             return null;
         },
-        getContents: function(rootNode) {
+        getContents: function (rootNode) {
             var rnd = this.getContentRoot(rootNode);
             var froot = $(rnd);
             var fstar = froot.find("*");
             return fstar;
         },
-        getContentRoot: function(rn) {
+        getContentRoot: function (rn) {
             var rnd = rn.thDoc;
             if (rnd.nodeName !== "#document") {
                 rnd = rnd.childNodes;
             }
             return rnd;
         },
-        processComments: function(rootNode) {
+        processComments: function (rootNode) {
             var comments = null, fstar, changed, i, iLimit, startComment, parent, startValue, pointer, nextPointer;
             do {
                 fstar = this.getContents(rootNode);
@@ -1311,7 +1311,7 @@ thymol = function() {
             } while (changed);
             this.processPrototypeOnlyComments(rootNode);
         },
-        processPrototypeOnlyComments: function(rootNode) {
+        processPrototypeOnlyComments: function (rootNode) {
             var comments = null, fstar, changed, indexOfLast, i, iLimit, j, jLimit, k, kLimit, startComment, parent, deletions, res, fullText, innerNodes, done, next, commentText, res2, blockElement, blockDoc, blockDocBody, blockBase, newNode, newDoc;
             do {
                 fstar = this.getContents(rootNode);
@@ -1394,7 +1394,7 @@ thymol = function() {
                 }
             } while (changed);
         },
-        insertUncommented: function(doc, deletions, parent) {
+        insertUncommented: function (doc, deletions, parent) {
             var docBody = $(doc).find("body")[0], i, iLimit, newNode;
             for (i = 0, iLimit = docBody.childNodes.length; i < iLimit; i++) {
                 if (parent.ownerDocument === doc) {
@@ -1410,7 +1410,7 @@ thymol = function() {
             }
             return true;
         },
-        getList: function(element, content) {
+        getList: function (element, content) {
             var argValue = content.trim(), argsCount = 0, argsList = [], assigs, i, iLimit, val;
             if (argValue) {
                 assigs = argValue.split(",");
@@ -1426,7 +1426,7 @@ thymol = function() {
             }
             return argsCount;
         },
-        testParam: function(param) {
+        testParam: function (param) {
             var initial = param, result = false, theParam = null, negate = false;
             if (typeof initial === "boolean") {
                 result = initial;
@@ -1452,7 +1452,7 @@ thymol = function() {
             }
             return result ? true : false;
         },
-        processImport: function(element, rootNode, attr) {
+        processImport: function (element, rootNode, attr) {
             var importNode = null, filePart, fragmentPart, names, parts, fragmentArgsList, isNode, fragment, fileName, content, importError;
             filePart = null;
             if (attr.value.indexOf("::") < 0) {
@@ -1489,7 +1489,7 @@ thymol = function() {
                         importError = null;
                         if (filePart != "") {
                             fileName = filePart + thymol.templateSuffix;
-                            $.get(fileName, function(textContent, status) {
+                            $.get(fileName, function (textContent, status) {
                                 try {
                                     if ("success" == status) {
                                         content = new thymol.thDomParser().parseFromString(textContent, "text/html");
@@ -1520,7 +1520,7 @@ thymol = function() {
             element.removeAttribute(attr.name);
             return importNode;
         },
-        getImportNode: function(element, filePart, fragmentArg, fragmentArgsList, content) {
+        getImportNode: function (element, filePart, fragmentArg, fragmentArgsList, content) {
             var result = null, fragmentName = fragmentArg.trim(), fragmentPart = fragmentName, parts, argsCount, matched, fragment, htmlContent, fragArray, i, iLimit, j, jLimit, k, clean, bare, vlParts, vlArgs, argsList, varName, newElement;
             fragmentName = fragmentName.replace(/text\(\)/g, textFuncSynonym);
             parts = fragmentName.match(varParExpr);
@@ -1620,7 +1620,7 @@ thymol = function() {
             }
             return result;
         },
-        getDOMSelection: function(initial, content) {
+        getDOMSelection: function (initial, content) {
             var spec = initial, result = null, scope = "", query = new Array(), parts = "", innr = thymol.ThUtils.unBracket(spec), i, iLimit, j, jLimit, k, kLimit, m, mLimit, token, indx, saved, indxed, start, selection, descend, subQuery, exprFrags, classSpecs, qTerms, subSelect, partial, html, newNode;
             if (spec != innr && innr.charAt(innr.length - 1) == "]") {
                 spec = innr;
@@ -1702,7 +1702,7 @@ thymol = function() {
                         for (k = 0, kLimit = selection.length; k < kLimit; k++) {
                             partial = null;
                             if (qTerms[j] == textFuncSynonym) {
-                                partial = $(selection[k]).contents().filter(function() {
+                                partial = $(selection[k]).contents().filter(function () {
                                     return this.nodeType === 3;
                                 });
                             } else if (descend) {
@@ -1752,7 +1752,7 @@ thymol = function() {
             }
             return result;
         },
-        getFilePath: function(part, element) {
+        getFilePath: function (part, element) {
             var result = thymol.substitute(part, element), mapped = null, slashpos;
             if (result) {
                 if (thymol.mappings) {
@@ -1787,7 +1787,7 @@ thymol = function() {
             }
             return result;
         },
-        doLiteralSubstExpr: function(param, primary) {
+        doLiteralSubstExpr: function (param, primary) {
             var result = param.trim(), term, subst, lsp;
             if (thymol.ThUtils.isLiteralSubst(result)) {
                 result = this.decodeLiteralSubst(result);
@@ -1810,7 +1810,7 @@ thymol = function() {
             }
             return result;
         },
-        decodeLiteralSubst: function(param) {
+        decodeLiteralSubst: function (param) {
             var result = param, parts, rep, i, iLimit;
             result = result.trim();
             result = result.substring(1, result.length - 1);
@@ -1834,11 +1834,11 @@ thymol = function() {
             }
             return result;
         },
-        doReplace: function(isNode, element, content) {
+        doReplace: function (isNode, element, content) {
             if (isNode) {
                 var parent = element.parentNode;
                 if (content.nodeName.toLowerCase() == "html") {
-                    this.doInsertion(element, content, function(e, n) {
+                    this.doInsertion(element, content, function (e, n) {
                         if (n.nodeType == 1) {
                             n.removeAttribute(thymol.thFragment.name);
                             n.removeAttribute(thymol.thFragment.synonym);
@@ -1863,7 +1863,7 @@ thymol = function() {
                             break;
                         }
                     }
-                    this.doInsertion(element, content, function(e, n) {
+                    this.doInsertion(element, content, function (e, n) {
                         if (n.nodeType == 1) {
                             n.removeAttribute(thymol.thFragment.name);
                             n.removeAttribute(thymol.thFragment.synonym);
@@ -1875,7 +1875,7 @@ thymol = function() {
                 }
             }
         },
-        doClone: function(old, targetDoc) {
+        doClone: function (old, targetDoc) {
             var node, cNodes, i, iNode, aNode;
             if (!!old.parentNode && old.parentNode.ownerDocument === targetDoc) {
                 node = old.cloneNode(false);
@@ -1905,7 +1905,7 @@ thymol = function() {
             }
             return node;
         },
-        doInsertion: function(element, content, func) {
+        doInsertion: function (element, content, func) {
             var topLevel = true, parent = element.parentElement, i, iLimit, iNode, elementName, j, jLimit, jNode, cJNode, cINode;
             if (parent != null) {
                 topLevel = element.parentElement.nodeName.toLowerCase() == "html";
@@ -1936,7 +1936,7 @@ thymol = function() {
                 }
             }
         },
-        getThParam: function(paramName, isBoolean, isPath, defaultValue) {
+        getThParam: function (paramName, isBoolean, isPath, defaultValue) {
             var localValue = defaultValue, globalValue = thymol.thWindow[paramName], theParam = thymol.ThUtils.getParameter(paramName);
             if (typeof globalValue === "undefined") {
                 globalValue = thymol.applicationContext.javascriptify(paramName);
@@ -2032,13 +2032,13 @@ thymol = function() {
         this.value = valueArg;
         this.globalValue;
         this["class"] = new thymol.ThClass("Thymol.ThParam");
-        this.getBooleanValue = function() {
+        this.getBooleanValue = function () {
             return !thymol.ThUtils.testLiteralFalse(this.value);
         };
-        this.toString = function() {
+        this.toString = function () {
             return this.value;
         };
-        this.getNumericValue = function() {
+        this.getNumericValue = function () {
             return Number(this.value);
         };
     }
@@ -2093,17 +2093,17 @@ thymol = function() {
             }
             attrList.push(this);
         }
-        this.process = function() {
+        this.process = function () {
             thymol.thWindow.alert('unsupported processing function for attribute "' + this.name + '"');
         };
         if (!(typeof func === "undefined")) {
             this.process = func;
         }
-        this.disable = function() {
+        this.disable = function () {
             this.name = null;
             this.escpName = null;
             this.escpSynonym = null;
-            this.process = function() {};
+            this.process = function () { };
         };
     }
     function ThElement(suffix, func, pref) {
@@ -2112,13 +2112,13 @@ thymol = function() {
         this.synonym = tha.synonym;
         this.endName = "/" + tha.name;
         this.endSynonym = "/" + tha.synonym;
-        this.process = function() {
+        this.process = function () {
             thymol.thWindow.alert('unsupported processing function for element "' + this.name + '"');
         };
         if (!(typeof func === "undefined")) {
             this.process = func;
         }
-        this.disable = function() {
+        this.disable = function () {
             this.name = null;
             this.synonym = null;
             this.endName = null;
@@ -2130,17 +2130,17 @@ thymol = function() {
     function ThSet() {
         this.that = this;
         this.setSize = 0;
-        this.isContent = function(k) {
+        this.isContent = function (k) {
             return this.hasOwnProperty(k) && typeof this[k] !== "function" && k !== "that" && k !== "setSize";
         };
-        this.add = function(k) {
+        this.add = function (k) {
             var contained = typeof this[k] !== "undefined";
             this[k] = k;
             if (contained !== (typeof this[k] !== "undefined")) {
                 this.setSize++;
             }
         };
-        this.addAll = function(other) {
+        this.addAll = function (other) {
             var k = null, value;
             for (k in other) {
                 if (other.hasOwnProperty(k)) {
@@ -2151,7 +2151,7 @@ thymol = function() {
                 }
             }
         };
-        this.clear = function() {
+        this.clear = function () {
             for (var k in this) {
                 if (this.hasOwnProperty(k)) {
                     delete this[k];
@@ -2159,10 +2159,10 @@ thymol = function() {
             }
             setSize = 0;
         };
-        this.contains = function(k) {
+        this.contains = function (k) {
             return typeof this[k] !== "undefined";
         };
-        this.containsAll = function(keys) {
+        this.containsAll = function (keys) {
             var keySet = keys, k = null;
             if (typeof keys === "Array" || Object.prototype.toString.call(keys) === "[object Array]") {
                 keySet = ThSet.prototype.fromArray(keys);
@@ -2176,23 +2176,23 @@ thymol = function() {
             }
             return true;
         };
-        this.isEmpty = function() {
+        this.isEmpty = function () {
             return this.setSize === 0;
         };
-        this.size = function() {
+        this.size = function () {
             return this.setSize;
         };
-        this.remove = function(k) {
+        this.remove = function (k) {
             var contained = typeof this[k] !== "undefined";
             delete this[k];
             if (contained !== (typeof this[k] !== "undefined")) {
                 this.setSize--;
             }
         };
-        this.toArray = function() {
+        this.toArray = function () {
             return getArray(this);
         };
-        this.toString = function() {
+        this.toString = function () {
             var array = getArray();
             return array.toString();
         };
@@ -2209,7 +2209,7 @@ thymol = function() {
             return array;
         }
     }
-    ThSet.prototype.fromArray = function(array) {
+    ThSet.prototype.fromArray = function (array) {
         var set = new thymol.ThSet(), i, iLimit;
         for (i = 0, iLimit = array.length; i < iLimit; i++) {
             set.add(array[i]);
@@ -2218,10 +2218,10 @@ thymol = function() {
     };
     function ThMap() {
         ThSet.apply(this);
-        this.containsKey = function(k) {
+        this.containsKey = function (k) {
             return this.contains(k);
         };
-        this.containsValue = function(target) {
+        this.containsValue = function (target) {
             var k = null, value;
             for (k in this.that) {
                 if (this.that.hasOwnProperty(k) && k !== "that") {
@@ -2233,28 +2233,28 @@ thymol = function() {
             }
             return false;
         };
-        this.entrySet = function() {
+        this.entrySet = function () {
             return this.that;
         };
-        this.get = function(k) {
+        this.get = function (k) {
             return this.that[k];
         };
-        this.keySet = function() {
+        this.keySet = function () {
             return this.that;
         };
-        this.put = function(k, v) {
+        this.put = function (k, v) {
             var contained = typeof this[k] !== "undefined";
             this.that[k] = v;
             if (contained !== (typeof this[k] !== "undefined")) {
                 this.setSize++;
             }
         };
-        this.putAll = function(t) {
+        this.putAll = function (t) {
             for (var k in t) {
                 put(k, t[k]);
             }
         };
-        this.values = function() {
+        this.values = function () {
             return this.that;
         };
     }
@@ -2271,7 +2271,7 @@ thymol = function() {
             }
         }
         this["class"] = new thymol.ThClass("Thymol.ThObject");
-        this.toNonThObject = function() {
+        this.toNonThObject = function () {
             var plain = {};
             for (prop in this) {
                 if (this.hasOwnProperty(prop)) {
@@ -2292,13 +2292,13 @@ thymol = function() {
     function ThVarsAccessor(storeArg, storeNameArg) {
         this.store = storeArg;
         this.arrayName = storeNameArg;
-        this.length = function() {
+        this.length = function () {
             return this.store.length;
         };
-        this.get = function(name) {
+        this.get = function (name) {
             return this.store[name];
         };
-        this.set = function(name, value) {
+        this.set = function (name, value) {
             this.store[name] = value;
         };
     }
@@ -2393,9 +2393,9 @@ thymol = function() {
         getBooleanValue: getBooleanValue,
         setLocale: setLocale
     };
-}();
+} ();
 
-thymol.makeContext = function(contextNameParam, varAccessorParam) {
+thymol.makeContext = function (contextNameParam, varAccessorParam) {
     var jsonDeclSpec = "(?:\\W*([\\'][A-Za-z]+(?:\\w|[$])*[\\'])\\s*[:])?\\s*([#][A-Za-z]+(?:\\w|[$])*)(?:\\W|[^$])*", jsonDeclExpr = new RegExp(jsonDeclSpec), context = new Array();
     context.contextName = contextNameParam;
     context.varAccessor = varAccessorParam;
@@ -2405,7 +2405,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         context.varAccessor = new thymol.ThVarsAccessor(context.varStore, "varStore");
     }
     context.varNamePrefix = context.varAccessor.arrayName + "[";
-    context.getJSONView = function(param, rootVal) {
+    context.getJSONView = function (param, rootVal) {
         var pType = typeof param, view = "", objType;
         if (pType === "string") {
             view = view + "'" + param + "'";
@@ -2424,7 +2424,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         }
         return view;
     };
-    context.init = function() {
+    context.init = function () {
         var persisted = thymol.thTop.name, paramRow, paramName, params, i, iLimit, paramValue;
         if (persisted && persisted !== "") {
             params = this.javascriptify(persisted);
@@ -2442,7 +2442,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
             }
         }
     };
-    context.getJSONViewObject = function(param, rootVal) {
+    context.getJSONViewObject = function (param, rootVal) {
         var isRoot = true, key = null, view = "{", value, identifier, definition, suffix, instanceNamePrefix, isTaken, i, iLimit, instanceValue;
         if (typeof rootVal === "boolean") {
             isRoot = rootVal;
@@ -2490,7 +2490,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         view = view + "}";
         return view;
     };
-    context.getJSONViewArray = function(param, rootVal) {
+    context.getJSONViewArray = function (param, rootVal) {
         var view = "[", i;
         for (i = 0; i < param.length; i++) {
             view = view + this.getJSONView(param[i], false);
@@ -2501,16 +2501,16 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         view = view + "]";
         return view;
     };
-    context.getAttribute = function(name) {
+    context.getAttribute = function (name) {
         return context[name];
     };
-    context.addAttribute = function(name, value) {
+    context.addAttribute = function (name, value) {
         var entry = [];
         entry[0] = name;
         entry[1] = value;
         varStore.push(entry);
     };
-    context.serialise = function() {
+    context.serialise = function () {
         varStore = [];
         var serialised = "[", key = null, value, cn, view, name, i, iLimit;
         for (key in context) {
@@ -2544,14 +2544,14 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         serialised = serialised + "]";
         return serialised;
     };
-    context.javascriptify = function(fn) {
+    context.javascriptify = function (fn) {
         try {
             return new Function("return " + fn)();
         } catch (err) {
             return undefined;
         }
     };
-    context.createVariable = function(name, valParam, isReq) {
+    context.createVariable = function (name, valParam, isReq) {
         var value = valParam, param, tt, literalBoolean, strValue, initial, existing, newArray;
         param = value;
         if (!(value instanceof thymol.ThParam)) {
@@ -2560,7 +2560,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
                 if (tt === "string") {
                     try {
                         value = isReq ? decodeURIComponent(value) : decodeURI(value);
-                    } catch (err) {}
+                    } catch (err) { }
                 }
                 if (tt === "boolean" || tt === "number") {
                     param = new thymol.ThParam(value);
@@ -2576,8 +2576,8 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
                             try {
                                 param = this.createJSONVariable(initial);
                             } catch (err) {
-                                if (err instanceof ReferenceError) {}
-                                if (err instanceof EvalError) {}
+                                if (err instanceof ReferenceError) { }
+                                if (err instanceof EvalError) { }
                                 if (param == null || isReq) {
                                     param = new thymol.ThParam(value);
                                 }
@@ -2611,7 +2611,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         }
         return param;
     };
-    context.createJSONVariable = function(initial) {
+    context.createJSONVariable = function (initial) {
         var current = initial.trim(), parts = " ", substIndex, token, re, vName, obj, result;
         substIndex = this.varAccessor.length() + 1;
         while (parts) {
@@ -2635,7 +2635,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
         }
         return result;
     };
-    context.resolveJSONReferences = function() {
+    context.resolveJSONReferences = function () {
         var key = null, param, prop = null, val, ref, subst, isReq = "request" === this.contextName;
         for (key in context) {
             if (key) {
@@ -2683,7 +2683,7 @@ thymol.makeContext = function(contextNameParam, varAccessorParam) {
     return context;
 };
 
-thymol.ThUtils = function() {
+thymol.ThUtils = function () {
     function mergeVars(thiz, other) {
         var current = thiz, prop = null;
         if (!current) {
@@ -2909,7 +2909,7 @@ thymol.ThUtils = function() {
     }
     function charOcurrences(str, chr) {
         var count = 0, i = 0, iLimit = str.length;
-        for (;i < iLimit; i++) {
+        for (; i < iLimit; i++) {
             if (str.charAt(i) === chr) {
                 count++;
             }
@@ -2953,9 +2953,9 @@ thymol.ThUtils = function() {
             dataType: "script",
             cache: true,
             async: false
-        }).done(function() {
+        }).done(function () {
             status = "success";
-        }).fail(function() {
+        }).fail(function () {
             status = "error";
         });
     }
@@ -2996,7 +2996,7 @@ thymol.ThUtils = function() {
         return result;
     }
     function unicodeUnescape(initial) {
-        var result = initial.replace(/\\u([\da-f]{4})/gi, function(match, grp) {
+        var result = initial.replace(/\\u([\da-f]{4})/gi, function (match, grp) {
             return String.fromCharCode(parseInt(grp, 16));
         });
         result = unescape(result);
@@ -3053,11 +3053,11 @@ thymol.ThUtils = function() {
         removeTag: removeTag,
         getRequestEncoded: getRequestEncoded
     };
-}();
+} ();
 
-thymol.ThParser = function(scope) {
+thymol.ThParser = function (scope) {
     function object(o) {
-        function F() {}
+        function F() { }
         F.prototype = o;
         return new F();
     }
@@ -3078,23 +3078,23 @@ thymol.ThParser = function(scope) {
         this.number_ = number_p !== undefined && number_p !== null ? number_p : 0;
         this.mode_ = mode_p !== undefined && mode_p !== null ? mode_p : 0;
         this.meta_ = meta_p;
-        this.toString = function() {
+        this.toString = function () {
             switch (this.type_) {
-              case TNUMBER:
-                return this.number_;
+                case TNUMBER:
+                    return this.number_;
 
-              case TOP1:
-              case TOP2:
-              case TVAR:
-                return this.index_;
+                case TOP1:
+                case TOP2:
+                case TVAR:
+                    return this.index_;
 
-              case TFUNCALL:
-              case MSGSUBST:
-              case ARGLIST:
-                return "CALL";
+                case TFUNCALL:
+                case MSGSUBST:
+                case ARGLIST:
+                    return "CALL";
 
-              default:
-                return "Invalid Token";
+                default:
+                    return "Invalid Token";
             }
         };
     }
@@ -3107,7 +3107,7 @@ thymol.ThParser = function(scope) {
         this.position = position;
     }
     Expression.prototype = {
-        simplify: function(valuesParam) {
+        simplify: function (valuesParam) {
             var values = valuesParam || {};
             var nstack = [];
             var newexpression = [];
@@ -3157,7 +3157,7 @@ thymol.ThParser = function(scope) {
             var res = new Expression(newexpression, object(this.ops1), object(this.ops2), object(this.functions), this.precision);
             return res;
         },
-        evaluate: function(element) {
+        evaluate: function (element) {
             var nstack = [];
             var n1;
             var n2;
@@ -3474,7 +3474,7 @@ thymol.ThParser = function(scope) {
             result = nstack[0];
             return result;
         },
-        updatePrecision: function(val) {
+        updatePrecision: function (val) {
             if (typeof val === "number") {
                 var p = thymol.ThUtils.getDecimalDigits(val);
                 if (typeof this.precision === "undefined" || p > this.precision) {
@@ -3525,12 +3525,12 @@ thymol.ThParser = function(scope) {
     function append(a, b) {
         if (a != null) {
             if (a.arrayResult === true || Object.prototype.toString.call(a) != "[object Array]") {
-                return [ a, b ];
+                return [a, b];
             }
         } else {
             if (b != null) {
                 if (b.arrayResult === true || Object.prototype.toString.call(b) != "[object Array]") {
-                    return [ a, b ];
+                    return [a, b];
                 }
                 return b;
             }
@@ -3590,7 +3590,7 @@ thymol.ThParser = function(scope) {
         var urlFragPos = -1;
         var meta = null;
         if (localMode !== 4 && c !== "'" && c !== '"') {
-            for (;i <= end; i++) {
+            for (; i <= end; i++) {
                 if (c.toUpperCase() === c.toLowerCase()) {
                     if (c === "{") {
                         inCurly = true;
@@ -3764,10 +3764,10 @@ thymol.ThParser = function(scope) {
             PI: Math.PI
         };
     }
-    ThParser.parse = function(expr, partial, preprocessed) {
+    ThParser.parse = function (expr, partial, preprocessed) {
         return new thymol.ThParser().parse(expr, partial, preprocessed);
     };
-    ThParser.evaluate = function(expr, partial, element) {
+    ThParser.evaluate = function (expr, partial, element) {
         return thymol.ThParser.parse(expr, partial, false).evaluate(element);
     };
     ThParser.Expression = Expression;
@@ -3809,7 +3809,7 @@ thymol.ThParser = function(scope) {
     var OPTION = 1 << 12;
     var ASSIGN = 1 << 13;
     ThParser.prototype = {
-        parse: function(expr, partial, preprocessed) {
+        parse: function (expr, partial, preprocessed) {
             this.errormsg = "";
             this.success = true;
             var operstack = [];
@@ -3822,7 +3822,7 @@ thymol.ThParser = function(scope) {
             this.pos = 0;
             this.mode = 0;
             while (this.pos < this.expression.length) {
-                if (this.isWhite()) {} else if (this.isOperator()) {
+                if (this.isWhite()) { } else if (this.isOperator()) {
                     if (this.isSign() && expected & SIGN) {
                         if (this.isNegativeSign()) {
                             this.tokenprio = 6;
@@ -3834,7 +3834,7 @@ thymol.ThParser = function(scope) {
                     } else if (this.isAssign() && expected & ASSIGN) {
                         noperators++;
                         expected = PRIMARY | LPAREN | LVARBRK | FUNCTION | SIGN | OPTION;
-                    } else if (this.isComment()) {} else {
+                    } else if (this.isComment()) { } else {
                         if (this.tokenindex == "!") {
                             if ((expected & SIGN) === 0) {
                                 this.error_parsing(this.pos, "unexpected sign");
@@ -4018,15 +4018,15 @@ thymol.ThParser = function(scope) {
             var res = new Expression(tokenstack, object(this.ops1), object(this.ops2), object(this.functions), this.precision, this.pos);
             return res;
         },
-        evaluate: function(expr, element) {
+        evaluate: function (expr, element) {
             return this.parse(expr).evaluate(element);
         },
-        error_parsing: function(column, msg) {
+        error_parsing: function (column, msg) {
             this.success = false;
             this.errormsg = "parse error [column " + column + "]: " + msg;
             throw new Error(this.errormsg);
         },
-        addfunc: function(tokenstack, operstack, type_) {
+        addfunc: function (tokenstack, operstack, type_) {
             var operator = new Token(type_, this.tokenindex, this.tokenprio + this.tmpprio, 0, this.mode, this.meta);
             while (operstack.length > 0) {
                 if (operator.prio_ <= operstack[operstack.length - 1].prio_) {
@@ -4037,7 +4037,7 @@ thymol.ThParser = function(scope) {
             }
             operstack.push(operator);
         },
-        isNumber: function() {
+        isNumber: function () {
             var r = false;
             var str = "";
             var prec = -1;
@@ -4062,7 +4062,7 @@ thymol.ThParser = function(scope) {
             }
             return r;
         },
-        isConst: function() {
+        isConst: function () {
             var str;
             for (var i in this.consts) {
                 if (true) {
@@ -4077,7 +4077,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isOperator: function() {
+        isOperator: function () {
             var ch = this.expression.charAt(this.pos);
             if (ch === "+") {
                 this.tokenprio = 0;
@@ -4152,7 +4152,7 @@ thymol.ThParser = function(scope) {
             this.pos++;
             return true;
         },
-        isRightBracket: function() {
+        isRightBracket: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 93) {
                 this.pos++;
@@ -4161,14 +4161,14 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isSign: function() {
+        isSign: function () {
             var code = this.expression.charCodeAt(this.pos - 1);
             if (code === 45 || code === 43) {
                 return true;
             }
             return false;
         },
-        isAssign: function() {
+        isAssign: function () {
             var code = this.expression.charCodeAt(this.pos - 1);
             if (code === 61) {
                 var cha = this.expression.charAt(this.pos - 2);
@@ -4183,21 +4183,21 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isPositiveSign: function() {
+        isPositiveSign: function () {
             var code = this.expression.charCodeAt(this.pos - 1);
             if (code === 43) {
                 return true;
             }
             return false;
         },
-        isNegativeSign: function() {
+        isNegativeSign: function () {
             var code = this.expression.charCodeAt(this.pos - 1);
             if (code === 45) {
                 return true;
             }
             return false;
         },
-        isLeftParenth: function() {
+        isLeftParenth: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 40) {
                 this.pos++;
@@ -4206,7 +4206,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isRightParenth: function() {
+        isRightParenth: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 41) {
                 this.pos++;
@@ -4215,7 +4215,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isLeftCurly: function() {
+        isLeftCurly: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 123) {
                 this.pos++;
@@ -4224,7 +4224,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isRightCurly: function() {
+        isRightCurly: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 125) {
                 this.pos++;
@@ -4233,7 +4233,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isComma: function() {
+        isComma: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 44) {
                 this.pos++;
@@ -4243,7 +4243,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isWhite: function() {
+        isWhite: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 32 || code === 9 || code === 10 || code === 13) {
                 this.pos++;
@@ -4251,7 +4251,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isLeftVarBrk: function(modestack) {
+        isLeftVarBrk: function (modestack) {
             var pp = this.pos, ch = this.expression.charAt(pp);
             if (ch === "$" || ch === "@" || ch === "*" || ch === "#") {
                 pp++;
@@ -4278,7 +4278,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isRightVarBrk: function() {
+        isRightVarBrk: function () {
             var code = this.expression.charCodeAt(this.pos);
             if (code === 125) {
                 this.pos++;
@@ -4287,7 +4287,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isOpX: function(str, group) {
+        isOpX: function (str, group) {
             if (str.str.length > 0) {
                 if (str.str in new Object()) {
                     return false;
@@ -4301,7 +4301,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isLiteralValue: function(str) {
+        isLiteralValue: function (str) {
             if (typeof str.str === "string") {
                 var first = str.str.charAt(0);
                 var last = str.str.charAt(str.str.length - 1);
@@ -4313,7 +4313,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isVar: function(str) {
+        isVar: function (str) {
             if (str.str.length > 0) {
                 this.tokenindex = str.str;
                 this.tokenprio = 4;
@@ -4322,7 +4322,7 @@ thymol.ThParser = function(scope) {
             }
             return false;
         },
-        isComment: function() {
+        isComment: function () {
             var code = this.expression.charCodeAt(this.pos - 1);
             if (code === 47 && this.expression.charCodeAt(this.pos) === 42) {
                 this.pos = this.expression.indexOf("*/", this.pos) + 2;
@@ -4335,12 +4335,12 @@ thymol.ThParser = function(scope) {
         }
     };
     return ThParser;
-}();
+} ();
 
-(function() {
-    var specAttrModList = [ "abbr", "accept", "accept-charset", "accesskey", "action", "align", "alt", "archive", "audio", "autocomplete", "axis", "background", "bgcolor", "border", "cellpadding", "cellspacing", "challenge", "charset", "cite", "class", "classid", "codebase", "codetype", "cols", "colspan", "compact", "content", "contenteditable", "contextmenu", "data", "datetime", "dir", "draggable", "dropzone", "enctype", "for", "form", "formaction", "formenctype", "formmethod", "formtarget", "frame", "frameborder", "headers", "height", "high", "href", "hreflang", "hspace", "http-equiv", "icon", "id", "keytype", "kind", "label", "lang", "list", "longdesc", "low", "manifest", "marginheight", "marginwidth", "max", "maxlength", "media", "method", "min", "name", "optimum", "pattern", "placeholder", "poster", "preload", "radiogroup", "rel", "rev", "rows", "rowspan", "rules", "sandbox", "scheme", "scope", "scrolling", "size", "sizes", "span", "spellcheck", "src", "srclang", "standby", "start", "step", "style", "summary", "tabindex", "target", "title", "type", "usemap", "value", "valuetype", "vspace", "width", "wrap", "xmlbase", "xmllang", "xmlspace" ];
-    var fixedValBoolAttrList = [ "async", "autofocus", "autoplay", "checked", "controls", "declare", "default", "defer", "disabled", "formnovalidate", "hidden", "ismap", "loop", "multiple", "novalidate", "nowrap", "open", "pubdate", "readonly", "required", "reversed", "scoped", "seamless", "selected" ];
-    var eventAttrList = [ "onabort", "onafterprint", "onbeforeprint", "onbeforeunload", "onblur", "oncanplay", "oncanplaythrough", "onchange", "onclick", "oncontextmenu", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchanged", "onemptied", "onended", "onerror", "onfocus", "onformchange", "onforminput", "onhashchange", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata", "onloadedmetadata", "onloadstart", "onmessage", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onoffline", "ononline", "onpause", "onplay", "onplaying", "onpopstate", "onprogress", "onratechange", "onreadystatechange", "onredo", "onreset", "onresize", "onscroll", "onseeked", "onseeking", "onselect", "onshow", "onstalled", "onstorage", "onsubmit", "onsuspend", "ontimeupdate", "onundo", "onunload", "onvolumechange", "onwaiting" ];
+(function () {
+    var specAttrModList = ["abbr", "accept", "accept-charset", "accesskey", "action", "align", "alt", "archive", "audio", "autocomplete", "axis", "background", "bgcolor", "border", "cellpadding", "cellspacing", "challenge", "charset", "cite", "class", "classid", "codebase", "codetype", "cols", "colspan", "compact", "content", "contenteditable", "contextmenu", "data", "datetime", "dir", "draggable", "dropzone", "enctype", "for", "form", "formaction", "formenctype", "formmethod", "formtarget", "frame", "frameborder", "headers", "height", "high", "href", "hreflang", "hspace", "http-equiv", "icon", "id", "keytype", "kind", "label", "lang", "list", "longdesc", "low", "manifest", "marginheight", "marginwidth", "max", "maxlength", "media", "method", "min", "name", "optimum", "pattern", "placeholder", "poster", "preload", "radiogroup", "rel", "rev", "rows", "rowspan", "rules", "sandbox", "scheme", "scope", "scrolling", "size", "sizes", "span", "spellcheck", "src", "srclang", "standby", "start", "step", "style", "summary", "tabindex", "target", "title", "type", "usemap", "value", "valuetype", "vspace", "width", "wrap", "xmlbase", "xmllang", "xmlspace"];
+    var fixedValBoolAttrList = ["async", "autofocus", "autoplay", "checked", "controls", "declare", "default", "defer", "disabled", "formnovalidate", "hidden", "ismap", "loop", "multiple", "novalidate", "nowrap", "open", "pubdate", "readonly", "required", "reversed", "scoped", "seamless", "selected"];
+    var eventAttrList = ["onabort", "onafterprint", "onbeforeprint", "onbeforeunload", "onblur", "oncanplay", "oncanplaythrough", "onchange", "onclick", "oncontextmenu", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchanged", "onemptied", "onended", "onerror", "onfocus", "onformchange", "onforminput", "onhashchange", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata", "onloadedmetadata", "onloadstart", "onmessage", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onoffline", "ononline", "onpause", "onplay", "onplaying", "onpopstate", "onprogress", "onratechange", "onreadystatechange", "onredo", "onreset", "onresize", "onscroll", "onseeked", "onseeking", "onselect", "onshow", "onstalled", "onstorage", "onsubmit", "onsuspend", "ontimeupdate", "onundo", "onunload", "onvolumechange", "onwaiting"];
     var literalTokenExpr = /^[a-zA-Z0-9\[\]\.\-_]*$/;
     var numericExpr = /^[+\-]?[0-9]*?[.]?[0-9]*?$/;
     var nonURLExpr = /[\$\*#]{1}\{(?:!?[^}]*)\}/;
@@ -4349,7 +4349,7 @@ thymol.ThParser = function(scope) {
     var javascriptInlineCommentExpr = /\/\*\[\[(.*)\]\]\*\//;
     var javascriptInlineRemainderExpr = /\s*(?:['][^']*['])*(?:["][^"]*["])*(?:[\(][^\(\)]*[\)])*(?:[\{][^\{\}]*[\}])*(?:[\[][^\[\]]*[\]])*((?:[;,\(\)\[\]:\{\}](?=(?:\s*\/\/.*?(?:\n|$)))(?:\s*\/\/.*?(?:\n|$)))|(?:\s*\/\/.*?(?:\n|$))|(?:[;,\(\)\[\]:\{\}](?=(?:\s*(?:\n|$)))(?:\s*(?:\n|$)))|(?:\s*(?:\n|$)))/;
     var thCase;
-    thymol.getThAttribute = function(part, element) {
+    thymol.getThAttribute = function (part, element) {
         var result = thymol.ThUtils.unParenthesise(part);
         result = thymol.doExpression(result, element);
         if (Object.prototype.toString.call(result) === "[object Array]") {
@@ -4362,7 +4362,7 @@ thymol.ThParser = function(scope) {
         }
         return result;
     };
-    thymol.doExpression = function(part, element) {
+    thymol.doExpression = function (part, element) {
         var result = thymol.ThUtils.unParenthesise(part), expr, unq, token, mapped;
         expr = null;
         unq = thymol.ThUtils.unQuote(result);
@@ -4394,7 +4394,7 @@ thymol.ThParser = function(scope) {
         }
         return result;
     };
-    thymol.processText = function(element, thUrlAttr, thAttr) {
+    thymol.processText = function (element, thUrlAttr, thAttr) {
         var url = thymol.getThAttribute(thUrlAttr.value, element), updated = false, text, newTextNode, i, iLimit, iUpper;
         if (url == null) {
             if (!thymol.allowNullText) {
@@ -4451,14 +4451,14 @@ thymol.ThParser = function(scope) {
         }
         return updated;
     };
-    thymol.processSpecAttrMod = function(element, thUrlAttr, thAttrObj) {
+    thymol.processSpecAttrMod = function (element, thUrlAttr, thAttrObj) {
         var url = thymol.getThAttribute(thUrlAttr.value, element);
         if (!url || !(url instanceof thymol.ThClass) || !url.abort) {
             element.setAttribute(thAttrObj.suffix, url);
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processAttr = function(element, thUrlAttr, thAttrObj) {
+    thymol.processAttr = function (element, thUrlAttr, thAttrObj) {
         var argValue = thUrlAttr.value.trim(), argsExpr, expr, identifier, attrName = null, ep, lp, url, tt;
         if (argValue) {
             do {
@@ -4505,7 +4505,7 @@ thymol.ThParser = function(scope) {
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processCSSAttr = function(element, thUrlAttr, thAttrObj) {
+    thymol.processCSSAttr = function (element, thUrlAttr, thAttrObj) {
         var parts = thUrlAttr.value.split(","), i, iLimit, expr, attrName, url, tt, existing;
         for (i = 0, iLimit = parts.length; i < iLimit; i++) {
             expr = parts[i];
@@ -4528,7 +4528,7 @@ thymol.ThParser = function(scope) {
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processFixedValBoolAttr = function(element, thUrlAttr, thAttrObj) {
+    thymol.processFixedValBoolAttr = function (element, thUrlAttr, thAttrObj) {
         var val = thymol.doFixedValBoolAttr(thUrlAttr.value, element, thAttrObj.suffix);
         if (val != null) {
             element.removeAttribute(thUrlAttr.name);
@@ -4538,14 +4538,14 @@ thymol.ThParser = function(scope) {
             }
         }
     };
-    thymol.doFixedValBoolAttr = function(valParam, element, attr) {
+    thymol.doFixedValBoolAttr = function (valParam, element, attr) {
         var val = thymol.getBoolean(valParam, element);
         if (val) {
             element.setAttribute(attr, attr);
         }
         return val;
     };
-    thymol.processPairedAttr = function(element, thUrlAttr, thAttrObj) {
+    thymol.processPairedAttr = function (element, thUrlAttr, thAttrObj) {
         var url = thymol.getThAttribute(thUrlAttr.value, element);
         if (url != "") {
             if (thAttrObj.suffix === "alt-title") {
@@ -4563,7 +4563,7 @@ thymol.ThParser = function(scope) {
             }
         }
     };
-    thymol.processConditional = function(element, attr, thAttrObj) {
+    thymol.processConditional = function (element, attr, thAttrObj) {
         var removed = false;
         if (attr.value) {
             removed = thymol.doIfOrUnless(element, attr.value, thAttrObj.suffix === "if");
@@ -4571,7 +4571,7 @@ thymol.ThParser = function(scope) {
         element.removeAttribute(attr.name);
         return removed;
     };
-    thymol.doIfOrUnless = function(element, value, isIf) {
+    thymol.doIfOrUnless = function (element, value, isIf) {
         var processed = false, flag;
         if (value) {
             flag = thymol.getBoolean(value, element);
@@ -4593,7 +4593,7 @@ thymol.ThParser = function(scope) {
         }
         return false;
     };
-    thymol.processEach = function(element, thUrlAttr, junk) {
+    thymol.processEach = function (element, thUrlAttr, junk) {
         var elementsUpdated = false, initial = thUrlAttr.value.trim(), colonPos, varName, varNames, statVarName, expr, root, node, i, iLimit, tho, stat, count, newNode, next;
         colonPos = initial.indexOf(":");
         if (colonPos > 0) {
@@ -4680,7 +4680,7 @@ thymol.ThParser = function(scope) {
         }
         return elementsUpdated;
     };
-    thymol.processObject = function(element, thUrlAttr) {
+    thymol.processObject = function (element, thUrlAttr) {
         var argValue = thUrlAttr.value.trim(), val;
         if (argValue) {
             val = thymol.getExpression(argValue, element);
@@ -4690,7 +4690,7 @@ thymol.ThParser = function(scope) {
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processInline = function(element, thUrlAttr, thAttrObj) {
+    thymol.processInline = function (element, thUrlAttr, thAttrObj) {
         var mode = thymol.getThAttribute(thUrlAttr.value, element);
         if (mode == "text") {
             thymol.doInlineText(element);
@@ -4703,7 +4703,7 @@ thymol.ThParser = function(scope) {
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.doInlineText = function(element) {
+    thymol.doInlineText = function (element) {
         var changed, value, i, iLimit, expr, term, result;
         for (i = 0, iLimit = element.childNodes.length; i < iLimit; i++) {
             do {
@@ -4732,7 +4732,8 @@ thymol.ThParser = function(scope) {
             } while (changed);
         }
     };
-    thymol.doInlineJavascript = function(element) {
+    thymol.doInlineJavascript = function (element) {
+        console.log('doInlineJavascript', element);
         var changed, value, second, i, iLimit, expr, scraps, remainder, termIndx, term, secondIndx, result;
         for (i = 0, iLimit = element.childNodes.length; i < iLimit; i++) {
             do {
@@ -4777,7 +4778,7 @@ thymol.ThParser = function(scope) {
             } while (changed);
         }
     };
-    thymol.getStringView = function(param) {
+    thymol.getStringView = function (param) {
         var view = "", objType;
         if (typeof param === "string") {
             view = view + "'" + param + "'";
@@ -4795,7 +4796,7 @@ thymol.ThParser = function(scope) {
         }
         return view;
     };
-    thymol.getStringViewArray = function(param) {
+    thymol.getStringViewArray = function (param) {
         var view = "[", i, iLimit;
         for (i = 0, iLimit = param.length; i < iLimit; i++) {
             view = view + thymol.getStringView(param[i]);
@@ -4806,7 +4807,7 @@ thymol.ThParser = function(scope) {
         view = view + "]";
         return view;
     };
-    thymol.getStringViewObject = function(param) {
+    thymol.getStringViewObject = function (param) {
         var view = "{", key = null;
         for (key in param) {
             if (key) {
@@ -4820,7 +4821,7 @@ thymol.ThParser = function(scope) {
         view = view + "}";
         return view;
     };
-    thymol.processRemove = function(element, thUrlAttr) {
+    thymol.processRemove = function (element, thUrlAttr) {
         var haveRemoved = false;
         var locals = element.thLocalVars, savedLocals = element.thLocalVars, arg, nodes, first;
         if (!locals) {
@@ -4859,7 +4860,7 @@ thymol.ThParser = function(scope) {
         } else if ("all-but-first" == arg) {
             nodes = element.childNodes;
             first = true;
-            $(nodes).each(function() {
+            $(nodes).each(function () {
                 if (this.nodeType == 1) {
                     if (!first) {
                         element.removeChild(this);
@@ -4868,10 +4869,10 @@ thymol.ThParser = function(scope) {
                     first = false;
                 }
             });
-        } else if ("none" == arg || null == arg) {}
+        } else if ("none" == arg || null == arg) { }
         return haveRemoved;
     };
-    thymol.processSwitch = function(element, attr) {
+    thymol.processSwitch = function (element, attr) {
         var val = thymol.ThUtils.unParenthesise(attr.value), updated = false, args, matched = false, thCaseSpecs, caseClause, remove, ccAttr;
         val = thymol.getThAttribute(val, element);
         if (typeof val === "string") {
@@ -4882,10 +4883,10 @@ thymol.ThParser = function(scope) {
         }
         val = thymol.ThUtils.unQuote(val);
         thCaseSpecs = $(thCase.escpName, element);
-        thCaseSpecs.each(function() {
+        thCaseSpecs.each(function () {
             caseClause = this;
             remove = true;
-            $(caseClause.attributes).each(function() {
+            $(caseClause.attributes).each(function () {
                 ccAttr = this;
                 if (thCase.name == ccAttr.name || thCase.synonym == ccAttr.name) {
                     if (!matched) {
@@ -4904,7 +4905,7 @@ thymol.ThParser = function(scope) {
         });
         return updated;
     };
-    thymol.processCase = function(element, attr, param) {
+    thymol.processCase = function (element, attr, param) {
         var val = thymol.substitute(attr.value, element);
         val = thymol.ThUtils.unQuote(val);
         if (val == "*" || param && param == val) {
@@ -4912,11 +4913,11 @@ thymol.ThParser = function(scope) {
         }
         return false;
     };
-    thymol.processWith = function(element, thUrlAttr) {
+    thymol.processWith = function (element, thUrlAttr) {
         thymol.getWith(element, thUrlAttr.value);
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processAssert = function(element, thUrlAttr) {
+    thymol.processAssert = function (element, thUrlAttr) {
         var argValue = thUrlAttr.value.trim(), result = true, term = "", terms, i, iLimit, expr, val, flag;
         if (argValue) {
             terms = argValue.split(",");
@@ -4956,10 +4957,10 @@ thymol.ThParser = function(scope) {
         }
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.processFragment = function(element, thUrlAttr, thAttrObj) {
+    thymol.processFragment = function (element, thUrlAttr, thAttrObj) {
         element.removeAttribute(thUrlAttr.name);
     };
-    thymol.getBoolean = function(param, element) {
+    thymol.getBoolean = function (param, element) {
         if (param == null) {
             return false;
         }
@@ -4989,18 +4990,18 @@ thymol.ThParser = function(scope) {
         }
         return flag;
     };
-    thymol.appendToAttrList = function(func, prec, attrArray) {
+    thymol.appendToAttrList = function (func, prec, attrArray) {
         var j, jLimit = attrArray.length, tha = null;
         for (j = 0; j < jLimit; j++) {
             tha = new thymol.ThAttr(attrArray[j], func, prec, thymol.thThymeleafPrefixList, thymol.prefix);
         }
         j = tha;
     };
-    thymol.setupAttrList = function() {
+    thymol.setupAttrList = function () {
         thCase = new thymol.ThAttr("case", null, 275, thymol.thThymeleafPrefixList, thymol.prefix);
         thymol.addDialect({
             prefix: thymol.prefix,
-            attributeProcessors: [ {
+            attributeProcessors: [{
                 name: "each",
                 processor: thymol.processEach,
                 precedence: 200
@@ -5076,7 +5077,7 @@ thymol.ThParser = function(scope) {
                 name: "remove",
                 processor: thymol.processRemove,
                 precedence: 1600
-            } ]
+            }]
         });
         thymol.appendToAttrList(thymol.processSpecAttrMod, 1e3, specAttrModList);
         thymol.appendToAttrList(thymol.processSpecAttrMod, 1e3, eventAttrList);
@@ -5084,7 +5085,7 @@ thymol.ThParser = function(scope) {
     };
 })();
 
-thymol.objects.thHttpSessionObject = function() {
+thymol.objects.thHttpSessionObject = function () {
     var thExpressionObjectName = "#httpSession";
     function getAttribute(name) {
         var result = thymol.sessionContext[name];
@@ -5124,9 +5125,9 @@ thymol.objects.thHttpSessionObject = function() {
         getRequestName: getRequestName,
         getParameterValues: getParameterValues
     };
-}();
+} ();
 
-thymol.objects.thHttpServletRequestObject = function() {
+thymol.objects.thHttpServletRequestObject = function () {
     var thExpressionObjectName = "#httpServletRequest";
     function getAttribute(name) {
         var result = thymol.requestContext[name][0];
@@ -5163,9 +5164,9 @@ thymol.objects.thHttpServletRequestObject = function() {
         getParameterValues: getParameterValues,
         getSession: getSession
     };
-}();
+} ();
 
-thymol.objects.thAggregatesObject = function() {
+thymol.objects.thAggregatesObject = function () {
     var thExpressionObjectName = "#aggregates";
     function sum(target) {
         return aggregate(target, false, "sum");
@@ -5223,9 +5224,9 @@ thymol.objects.thAggregatesObject = function() {
         sum: sum,
         avg: avg
     };
-}();
+} ();
 
-thymol.objects.thArraysObject = function() {
+thymol.objects.thArraysObject = function () {
     var thExpressionObjectName = "#arrays";
     function toArray(target) {
         if (target !== null) {
@@ -5377,9 +5378,9 @@ thymol.objects.thArraysObject = function() {
         contains: contains,
         containsAll: containsAll
     };
-}();
+} ();
 
-thymol.objects.thBoolsObject = function() {
+thymol.objects.thBoolsObject = function () {
     var thExpressionObjectName = "#bools";
     function isTrue(target) {
         var result = true;
@@ -5513,9 +5514,9 @@ thymol.objects.thBoolsObject = function() {
         listOr: arrayOr,
         setOr: setOr
     };
-}();
+} ();
 
-thymol.objects.thDatesObject = function() {
+thymol.objects.thDatesObject = function () {
     var thExpressionObjectName = "#dates";
     function createProxy() {
         if (arguments !== null) {
@@ -5841,7 +5842,7 @@ thymol.objects.thDatesObject = function() {
     function processTZ(target) {
         var toStr = String(target);
         var result = toStr;
-        result = (result.match(timezone) || [ "" ]).pop();
+        result = (result.match(timezone) || [""]).pop();
         if ("" !== result) {
             result = result.replace(timezoneClip, "");
             var tail = toStr.match(/[\(]((?:[GL]M|BS)T[^\)]*?)[\)]/);
@@ -5855,13 +5856,13 @@ thymol.objects.thDatesObject = function() {
         }
         return result;
     }
-    var dateFormat = function() {
-        var token = /d{1,4}|M{1,4}|yy(?:yy)?|([HhmsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g, pad = function(valp, lenp) {
+    var dateFormat = function () {
+        var token = /d{1,4}|M{1,4}|yy(?:yy)?|([HhmsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g, pad = function (valp, lenp) {
             var val = String(valp), len = lenp || 2;
             while (val.length < len) val = "0" + val;
             return val;
         };
-        return function(datep, maskp, utcp) {
+        return function (datep, maskp, utcp) {
             var dF = dateFormat, mask = maskp, date = datep, utc = utcp;
             if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
                 mask = date;
@@ -5901,13 +5902,13 @@ thymol.objects.thDatesObject = function() {
                 TT: H < 12 ? "AM" : "PM",
                 Z: utc ? "UTC" : processTZ(date),
                 o: (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
-                S: [ "th", "st", "nd", "rd" ][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+                S: ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
             };
-            return mask.replace(token, function($0) {
+            return mask.replace(token, function ($0) {
                 return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
             });
         };
-    }();
+    } ();
     dateFormat.masks = {
         "default": "dd MMMM yyyy HH:mm:ss Z",
         shortDate: "M/d/yy",
@@ -5923,10 +5924,10 @@ thymol.objects.thDatesObject = function() {
         isoUtcDateTime: "UTC:yyyy-MM-dd'T'HH:mm:ss'Z'"
     };
     dateFormat.i18n = {
-        dayNames: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ],
-        monthNames: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+        dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     };
-    Date.prototype.format = function(mask, utc) {
+    Date.prototype.format = function (mask, utc) {
         return dateFormat(this, mask, utc);
     };
     return {
@@ -5990,9 +5991,9 @@ thymol.objects.thDatesObject = function() {
         listMillisecond: arrayMillisecond,
         setMillisecond: setMillisecond
     };
-}();
+} ();
 
-thymol.objects.thCalendarsObject = function() {
+thymol.objects.thCalendarsObject = function () {
     var thExpressionObjectName = "#calendars";
     return {
         thExpressionObjectName: thExpressionObjectName,
@@ -6055,9 +6056,9 @@ thymol.objects.thCalendarsObject = function() {
         listMillisecond: thymol.objects.thDatesObject.arrayMillisecond,
         setMillisecond: thymol.objects.thDatesObject.setMillisecond
     };
-}();
+} ();
 
-thymol.objects.thIdsObject = function() {
+thymol.objects.thIdsObject = function () {
     var thExpressionObjectName = "#ids";
     function seq(id) {
         if (id !== null) {
@@ -6113,9 +6114,9 @@ thymol.objects.thIdsObject = function() {
         next: next,
         prev: prev
     };
-}();
+} ();
 
-thymol.objects.thListsObject = function() {
+thymol.objects.thListsObject = function () {
     var thExpressionObjectName = "#lists";
     function sort(list, comparator) {
         if (list !== null) {
@@ -6141,9 +6142,9 @@ thymol.objects.thListsObject = function() {
         containsAll: thymol.objects.thArraysObject.containsAll,
         sort: sort
     };
-}();
+} ();
 
-thymol.objects.thMapsObject = function() {
+thymol.objects.thMapsObject = function () {
     var thExpressionObjectName = "#maps";
     function size(target) {
         if (target !== null) {
@@ -6235,9 +6236,9 @@ thymol.objects.thMapsObject = function() {
         containsAllKeys: containsAllKeys,
         containsAllValues: containsAllValues
     };
-}();
+} ();
 
-thymol.objects.thMessagesObject = function() {
+thymol.objects.thMessagesObject = function () {
     var thExpressionObjectName = "#messages";
     function msg() {
         if (arguments !== null) {
@@ -6368,9 +6369,9 @@ thymol.objects.thMessagesObject = function() {
         listMsgOrNullWithParams: arrayMsgOrNullWithParams,
         setMsgOrNullWithParams: setMsgOrNullWithParams
     };
-}();
+} ();
 
-thymol.objects.thNumbersObject = function() {
+thymol.objects.thNumbersObject = function () {
     var thExpressionObjectName = "#numbers";
     var DEFAULT_THOU_PT = ",";
     var DEFAULT_DECI_PT = ".";
@@ -6592,9 +6593,9 @@ thymol.objects.thNumbersObject = function() {
         setFormatDecimal: setFormatDecimalProxy,
         sequence: sequenceProxy
     };
-}();
+} ();
 
-thymol.objects.thObjectsObject = function() {
+thymol.objects.thObjectsObject = function () {
     var thExpressionObjectName = "#objects";
     function nullSafe(target, defaultValue) {
         return target != null ? target : defaultValue;
@@ -6628,9 +6629,9 @@ thymol.objects.thObjectsObject = function() {
         listNullSafe: arrayNullSafe,
         setNullSafe: setNullSafe
     };
-}();
+} ();
 
-thymol.objects.thSetsObject = function() {
+thymol.objects.thSetsObject = function () {
     var thExpressionObjectName = "#sets";
     function toSet(target) {
         if (target !== null) {
@@ -6741,9 +6742,9 @@ thymol.objects.thSetsObject = function() {
         contains: contains,
         containsAll: containsAll
     };
-}();
+} ();
 
-thymol.objects.thStringsObject = function() {
+thymol.objects.thStringsObject = function () {
     var thExpressionObjectName = "#strings";
     function toString(target) {
         var result = null;
@@ -7803,68 +7804,68 @@ thymol.objects.thStringsObject = function() {
             var cc = target.charCodeAt(i);
             if (cc >= 32 && cc <= 127) {
                 switch (c) {
-                  case "\\":
-                    c = "\\";
-                    break;
+                    case "\\":
+                        c = "\\";
+                        break;
 
-                  case '"':
-                    c = '\\"';
-                    break;
+                    case '"':
+                        c = '\\"';
+                        break;
 
-                  case "'":
-                    if (javaScript) {
-                        c = "\\'";
-                    }
-                    break;
-
-                  case "/":
-                    if (javaScript) {
-                        if (i > 0 && target.charAt(i - 1) == "<") {
-                            c = "\\/";
+                    case "'":
+                        if (javaScript) {
+                            c = "\\'";
                         }
-                    }
-                    break;
+                        break;
 
-                  case ">":
-                    if (javaScript && i > 1) {
-                        if (target.charAt(i - 1) == "]" && target.charAt(i - 2) == "]") {
-                            c = "\\>";
+                    case "/":
+                        if (javaScript) {
+                            if (i > 0 && target.charAt(i - 1) == "<") {
+                                c = "\\/";
+                            }
                         }
-                    }
-                    break;
+                        break;
 
-                  default:
-                    break;
+                    case ">":
+                        if (javaScript && i > 1) {
+                            if (target.charAt(i - 1) == "]" && target.charAt(i - 2) == "]") {
+                                c = "\\>";
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
             } else {
                 switch (c) {
-                  case "	":
-                    c = "\\t";
-                    break;
+                    case "	":
+                        c = "\\t";
+                        break;
 
-                  case "\n":
-                    c = "\\n";
-                    break;
+                    case "\n":
+                        c = "\\n";
+                        break;
 
-                  case "\b":
-                    c = "\\b";
-                    break;
+                    case "\b":
+                        c = "\\b";
+                        break;
 
-                  case "\f":
-                    c = "\\f";
-                    break;
+                    case "\f":
+                        c = "\\f";
+                        break;
 
-                  case "\r":
-                    c = "\\r";
-                    break;
+                    case "\r":
+                        c = "\\r";
+                        break;
 
-                  default:
-                    if (javaScript) {
-                        c = hexEscape(cc);
-                    } else {
-                        c = unicodeEscape(cc);
-                    }
-                    break;
+                    default:
+                        if (javaScript) {
+                            c = hexEscape(cc);
+                        } else {
+                            c = unicodeEscape(cc);
+                        }
+                        break;
                 }
             }
             result += c;
@@ -7964,28 +7965,28 @@ thymol.objects.thStringsObject = function() {
                     hexLen = 0;
                 } else {
                     switch (c) {
-                      case "t":
-                        c = "	";
-                        break;
+                        case "t":
+                            c = "	";
+                            break;
 
-                      case "n":
-                        c = "\n";
-                        break;
+                        case "n":
+                            c = "\n";
+                            break;
 
-                      case "b":
-                        c = "\b";
-                        break;
+                        case "b":
+                            c = "\b";
+                            break;
 
-                      case "f":
-                        c = "\f";
-                        break;
+                        case "f":
+                            c = "\f";
+                            break;
 
-                      case "r":
-                        c = "\r";
-                        break;
+                        case "r":
+                            c = "\r";
+                            break;
 
-                      default:
-                        break;
+                        default:
+                            break;
                     }
                     result += c;
                     lastWasEscape = false;
@@ -8250,22 +8251,22 @@ thymol.objects.thStringsObject = function() {
         listDefaultString: listDefaultString,
         setDefaultString: setDefaultString
     };
-}();
+} ();
 
-thymol.thObjectsConfigureModules = function() {
+thymol.thObjectsConfigureModules = function () {
     thymol.addDialect({
-        objects: [ thymol.objects.thAggregatesObject, thymol.objects.thArraysObject, thymol.objects.thBoolsObject, thymol.objects.thDatesObject, thymol.objects.thCalendarsObject, thymol.objects.thIdsObject, thymol.objects.thListsObject, thymol.objects.thMapsObject, thymol.objects.thMessagesObject, thymol.objects.thNumbersObject, thymol.objects.thObjectsObject, thymol.objects.thSetsObject, thymol.objects.thStringsObject ]
+        objects: [thymol.objects.thAggregatesObject, thymol.objects.thArraysObject, thymol.objects.thBoolsObject, thymol.objects.thDatesObject, thymol.objects.thCalendarsObject, thymol.objects.thIdsObject, thymol.objects.thListsObject, thymol.objects.thMapsObject, thymol.objects.thMessagesObject, thymol.objects.thNumbersObject, thymol.objects.thObjectsObject, thymol.objects.thSetsObject, thymol.objects.thStringsObject]
     });
 };
 
-(function() {
+(function () {
     var DOMParser_proto = thymol.thDomParser.prototype, real_parseFromString = DOMParser_proto.parseFromString;
     try {
         if (new thymol.thDomParser().parseFromString("", "text/html")) {
             return;
         }
-    } catch (ignore) {}
-    DOMParser_proto.parseFromString = function(markup, type) {
+    } catch (ignore) { }
+    DOMParser_proto.parseFromString = function (markup, type) {
         var res, doc;
         if (/^\s*text\/html\s*(?:;|$)/i.test(type)) {
             doc = thymol.thDocument.implementation.createHTMLDocument("");
@@ -8283,7 +8284,7 @@ thymol.thObjectsConfigureModules = function() {
 })();
 
 if (!Array.indexOf) {
-    Array.prototype.indexOf = function(obj, start) {
+    Array.prototype.indexOf = function (obj, start) {
         for (var i = start || 0; i < this.length; i++) {
             if (this[i] === obj) {
                 return i;
@@ -8293,12 +8294,12 @@ if (!Array.indexOf) {
     };
 }
 
-$(function() {
+$(function () {
     thymol.jqSetup($);
     thymol.execute(document);
 });
 
-$(window).unload(function() {
+$(window).unload(function () {
     if (thymol.sessionContext && thymol.sessionContext.persist) {
         thymol.sessionContext.persist();
     }
